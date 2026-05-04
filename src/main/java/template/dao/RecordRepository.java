@@ -1,4 +1,7 @@
-import com.pc.monitor.model.PerformanceRecord;
+package template.dao;
+
+import template.config.DBUtil;
+import template.model.PerformanceRecord;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

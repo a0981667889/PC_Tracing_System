@@ -1,3 +1,5 @@
+package template.model;
+
 public class HardwareStats {
     public double CpuUsage;
     public double GpuUsage;

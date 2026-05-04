@@ -1,5 +1,6 @@
+import template.model.PerformanceRecord;
 public class AnalysisService {
-    public void checkBottleneck(com.pc.monitor.model.PerformanceRecord record) {
+    public void checkBottleneck(template.model.PerformanceRecord record) {
         System.out.println("\n--- 自動效能分析報告 ---");
 
         if (record.getGpuUsage() < 80 && record.getCpuUsage() > 90) {
