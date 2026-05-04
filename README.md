@@ -1,5 +1,5 @@
 🖥️ PC 效能即時監控系統 (Hardware Performance Monitor)
-針對高階 PC 硬體設計的監控系統，支持 Intel 第 14 代 CPU 架構與 RTX 50 系列 顯卡，實現 240 FPS 環境下的穩定數據紀錄。
+PC 硬體設計的監控系統。
 
 ## 🏗️ 專案架構
 
