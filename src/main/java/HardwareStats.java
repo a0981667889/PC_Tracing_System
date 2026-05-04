@@ -1,9 +1,14 @@
 public class HardwareStats {
     public double CpuUsage;
-    public double GpuUsage; // OSHI 較難直接取得 GPU 負載，通常這需要額外的 WMI 查詢或第三方軟體 API
+    public double GpuUsage;
+    public double CpuTemp;  // 新增
+    public double GpuTemp;  // 新增
 
-    public HardwareStats(double cpuUsage, double gpuUsage) {
+    // 關鍵在於這裡：建構子必須接收 4 個參數
+    public HardwareStats(double cpuUsage, double gpuUsage, double cpuTemp, double gpuTemp) {
         this.CpuUsage = cpuUsage;
         this.GpuUsage = gpuUsage;
+        this.CpuTemp = cpuTemp;
+        this.GpuTemp = gpuTemp;
     }
 }
