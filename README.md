@@ -103,7 +103,8 @@ classDiagram
     Main --> HardwareMonitor
     Main --> RecordRepository
     HardwareMonitor ..> HardwareStats : produces
-    RecordRepository ..> PerformanceRecord : saves```
+    RecordRepository ..> PerformanceRecord : saves
+```
 
 ## 📊 ERD（Mermaid）
 
