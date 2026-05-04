@@ -1,9 +1,12 @@
+package template.hardware;
+
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.Sensors;
+import template.model.HardwareStats;
 
 public class HardwareMonitor {
     // 初始化 OSHI 系統資訊

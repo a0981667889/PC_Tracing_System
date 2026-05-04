@@ -1,8 +1,12 @@
-import com.pc.monitor.model.PerformanceRecord;
+
+import template.model.PerformanceRecord;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Cpu;
 import com.profesorfalken.jsensors.model.components.Gpu;
+import template.dao.RecordRepository;
+import template.hardware.HardwareMonitor;
+import template.model.HardwareStats;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +23,7 @@ public class Main {
         System.out.println("\n=== 自動監控系統已啟動 ===");
         System.out.println("監控週期：每 5 秒一次");
         System.out.println("寫入目標：PostgreSQL (benchmark_records)");
-        System.out.println("按下 Ctrl+C 可停止程式\n");
+        //System.out.println("按下 Ctrl+C 可停止程式\n");
 
         // 3. 開啟自動化監控迴圈
         while (true) {

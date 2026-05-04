@@ -1,4 +1,4 @@
-package com.pc.monitor.model;
+package template.model;
 
 public class PerformanceRecord {
     // 使用 private 隱私化欄位，這是良好的開發習慣
