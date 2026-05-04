@@ -120,7 +120,7 @@ erDiagram
         double gpu_usage
         timestamp created_at
     }
-    }
+    
 ```
 
 ---
