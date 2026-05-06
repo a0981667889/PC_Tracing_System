@@ -50,10 +50,12 @@ CREATE TABLE performance_records (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+```
 -- 2. 插入測試帳號
+```
 INSERT INTO users (username, password_hash) VALUES ('admin', 'admin123'), ('guest', 'guest123');
 );
-
+```
 
 
 
