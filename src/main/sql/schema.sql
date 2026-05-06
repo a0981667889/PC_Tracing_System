@@ -43,10 +43,10 @@ CREATE INDEX IF NOT EXISTS idx_user_records_latest
 -- 插入兩個測試帳號，對應 Main 登入流程
 INSERT INTO users (username, password_hash)
 VALUES
-    ('admin', '123'),
-    ('guest', '456')
+    ('admin', 'admin123'),
+    ('guest', 'guest123')
     ON CONFLICT (username) DO NOTHING;
 
 -- 預插一筆歷史數據，方便執行 ComparisonService 對比測試
 INSERT INTO performance_records (monitor_name, fps, cpu_temp, gpu_temp, cpu_usage, gpu_usage, user_id)
-VALUES ('RTX-5070-Reference', 240.0, 45.0, 62.0, 15.5, 30.2, 1);
+VALUES ('GPU-Reference', 240.0, 45.0, 62.0, 15.5, 30.2, 1);
