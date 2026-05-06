@@ -2,42 +2,48 @@ package template;
 
 import template.Repository.RecordDao;
 import template.model.PerformanceRecord;
+import template.hardware.HardwareMonitor;
+import template.model.HardwareStats;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Cpu;
 import com.profesorfalken.jsensors.model.components.Gpu;
-import template.hardware.HardwareMonitor;
-import template.model.HardwareStats;
-import java.util.Scanner; // 引入 Scanner 以便輸入 ID
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== 系統啟動中 ===");
-
-        // --- 修正點 1: 處理帳號系統 ---
         Scanner scanner = new Scanner(System.in);
-        System.out.print("請輸入您的使用者 ID (例如 1 或 2): ");
-        int userId = scanner.nextInt();
+        RecordDao repo = new RecordDao();
+        int userId = -1;
 
-        // 1. 執行硬體診斷
+        System.out.println("=== PC 效能監控系統登入 ===");
+
+        // 1. 登入驗證迴圈[cite: 5]
+        while (userId == -1) {
+            System.out.print("帳號: ");
+            String user = scanner.next();
+            System.out.print("密碼: ");
+            String pass = scanner.next();
+
+            userId = repo.login(user, pass);
+
+            if (userId == -1) {
+                System.out.println("[錯誤] 帳號或密碼不正確，請重新輸入。");
+            }
+        }
+
+        System.out.println("\n[系統] 登入成功！使用者 ID: " + userId);
         runHardwareDiagnostic();
 
-        // 2. 初始化資源
+        // 2. 初始化監控資源
         HardwareMonitor monitor = new HardwareMonitor();
-        RecordDao repo = new RecordDao();
+        System.out.println("=== 自動監控已啟動 (每 5 秒存檔一次) ===");
 
-        System.out.println("\n=== 自動監控系統已啟動 ===");
-        System.out.println("當前帳號 ID: " + userId);
-        System.out.println("監控週期：每 5 秒一次");
-
-        // 3. 開啟自動化監控迴圈
+        // 3. 監控主迴圈[cite: 5]
         while (true) {
             try {
-                // A. 透過 JSensors 抓取真實數據
                 HardwareStats stats = monitor.getStats();
 
-                // B. 封裝成資料庫物件
-                // 請確保 PerformanceRecord.java 裡有這個 6 個參數的構造函數
                 PerformanceRecord record = new PerformanceRecord(
                         "RealTime_Monitoring",
                         240.0,
@@ -48,28 +54,28 @@ public class Main {
                         stats.monitorName
                 );
 
-                // C. 寫入資料庫 (傳入剛才取得的 userId)
                 repo.save(record, userId);
 
-                // D. 控制台即時回報
-                System.out.printf("[%tT] 紀錄成功 -> CPU: %.1f°C (%.1f%%) | GPU: %.1f°C (%.1f%%)%n",
-                        System.currentTimeMillis(),
-                        stats.CpuTemp, stats.CpuUsage,
-                        stats.GpuTemp, stats.GpuUsage);
+                System.out.printf("[%tT] CPU: %.1f°C | GPU: %.1f°C (存檔成功)%n",
+                        System.currentTimeMillis(), stats.CpuTemp, stats.GpuTemp);
 
                 Thread.sleep(5000);
-
-            } catch (InterruptedException e) {
-                System.out.println("\n[系統通知] 正在安全關閉...");
-                break;
             } catch (Exception e) {
-                System.err.println("[錯誤] 失敗: " + e.getMessage());
-                try { Thread.sleep(5000); } catch (InterruptedException ex) { break; }
+                System.err.println("監控異常: " + e.getMessage());
+                try { Thread.sleep(5000); } catch (InterruptedException ignored) {}
             }
         }
     }
 
     public static void runHardwareDiagnostic() {
-        // ... 原本的診斷邏輯不變 ...
+        System.out.println("--- 正在檢測硬體感測器 ---");
+        Components components = JSensors.get.components();
+        if (components.cpus != null && !components.cpus.isEmpty()) {
+            System.out.println("偵測到 CPU: " + components.cpus.get(0).name);
+        }
+        if (components.gpus != null && !components.gpus.isEmpty()) {
+            System.out.println("偵測到 GPU: " + components.gpus.get(0).name);
+        }
+        System.out.println("--- 診斷結束 ---\n");
     }
 }
