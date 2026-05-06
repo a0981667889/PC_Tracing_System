@@ -43,7 +43,7 @@ CREATE INDEX IF NOT EXISTS idx_user_latest_record
 INSERT INTO users (username, password_hash)
 VALUES ('admin', 'admin123'), ('guest', 'guest123')
     ON CONFLICT (username) DO NOTHING;
-
+--123--
 -- (選填) 插入一筆初始數據供對比測試使用
 -- INSERT INTO performance_records (monitor_name, fps, cpu_temp, gpu_temp, cpu_usage, gpu_usage, user_id)
 -- VALUES ('Initial_Test', 240.0, 45.5, 60.2, 15.0, 30.0, 1);
