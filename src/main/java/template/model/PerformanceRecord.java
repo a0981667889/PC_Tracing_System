@@ -9,15 +9,20 @@ public class PerformanceRecord {
     private double gpuTemp;
     private double cpuUsage;
     private double gpuUsage;
+    protected String monitorName;
+    public PerformanceRecord() {
+    }
+
 
     // 建構子 (Constructor)
-    public PerformanceRecord(String gameName, double avgFps, double cpuTemp, double gpuTemp, double cpuUsage, double gpuUsage) {
+    public PerformanceRecord(String gameName, double avgFps, double cpuTemp, double gpuTemp, double cpuUsage, double gpuUsage,String monitorName) {
         this.gameName = gameName;
         this.avgFps = avgFps;
         this.cpuTemp = cpuTemp;
         this.gpuTemp = gpuTemp;
         this.cpuUsage = cpuUsage;
         this.gpuUsage = gpuUsage;
+        this.monitorName = monitorName;
     }
 
     // --- Getter 和 Setter 開始 ---
@@ -80,5 +85,10 @@ public class PerformanceRecord {
 
     public void setGpuUsage(double gpuUsage) {
         this.gpuUsage = Math.min(gpuUsage, 100.0);
+    }
+    
+    public String getMonitorName() {return monitorName;}
+
+    public void setMonitorName(String monitorName) {
     }
 }
