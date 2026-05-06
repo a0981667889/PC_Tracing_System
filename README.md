@@ -50,7 +50,7 @@ CREATE TABLE performance_records (
 );
 
 -- 插入測試帳號以供對比
-INSERT INTO users (username, password_hash) VALUES ('Player_A', '123'), ('Player_B', '456');
+INSERT INTO users (username, password_hash) VALUES ('admin', 'admin123'), ('guest', 'guest123');
 ```
 
 
