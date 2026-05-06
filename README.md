@@ -85,7 +85,7 @@ Java: JDK 17+
 
 ```
 Hardware(PC) → HardwareMonitor(OSHI/JSensors) → RecordRepository(JDBC) → PostgreSQL
-      ↑ 讀取感測器               ↑ 數據封裝                      ↑ SQL 寫入
+                      ↑ 讀取感測器                ↑ 數據封裝              ↑ SQL 寫入
 ```
 
 ### 各層職責
